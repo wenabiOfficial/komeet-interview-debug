@@ -118,8 +118,8 @@ INSERT INTO participations (id, user_id, mission_id, status, registered_at) VALU
   (17, 2,  3, 'confirmed',  date('now', '-17 days')),
   (18, 4,  3, 'confirmed',  date('now', '-17 days')),
   (19, 6,  3, 'confirmed',  date('now', '-16 days')),
-  (20, 8,  3, 'confirmed',  date('now', '-16 days')),
-  (21, 10, 3, 'registered', date('now', '-16 days')),
+  (20, 8,  3, 'cancelled',  date('now', '-16 days')),
+  (21, 10, 3, 'cancelled',  date('now', '-16 days')),
   (22, 15, 3, 'confirmed',  date('now', '-16 days')),
   (23, 16, 3, 'confirmed',  date('now', '-16 days')),
   (24, 21, 3, 'confirmed',  date('now', '-17 days')),  -- soft-deleted user
@@ -128,8 +128,8 @@ INSERT INTO participations (id, user_id, mission_id, status, registered_at) VALU
   (26, 3,  4, 'confirmed',  date('now', '-12 days')),
   (27, 7,  4, 'confirmed',  date('now', '-11 days')),
   (28, 9,  4, 'confirmed',  date('now', '-11 days')),
-  (29, 12, 4, 'confirmed',  date('now', '-11 days')),
-  (30, 17, 4, 'registered', date('now', '-10 days')),
+  (29, 12, 4, 'cancelled',  date('now', '-11 days')),
+  (30, 17, 4, 'cancelled',  date('now', '-10 days')),
   (31, 18, 4, 'confirmed',  date('now', '-10 days')),
   (32, 19, 4, 'confirmed',  date('now', '-10 days')),
   -- Mission 5: Nettoyage berges
@@ -137,8 +137,8 @@ INSERT INTO participations (id, user_id, mission_id, status, registered_at) VALU
   (34, 4,  5, 'confirmed',  date('now', '-7 days')),
   (35, 5,  5, 'confirmed',  date('now', '-7 days')),
   (36, 6,  5, 'confirmed',  date('now', '-6 days')),
-  (37, 11, 5, 'confirmed',  date('now', '-6 days')),
-  (38, 14, 5, 'registered', date('now', '-6 days')),
+  (37, 11, 5, 'cancelled',  date('now', '-6 days')),
+  (38, 14, 5, 'cancelled',  date('now', '-6 days')),
   (39, 15, 5, 'confirmed',  date('now', '-6 days')),
   (40, 20, 5, 'confirmed',  date('now', '-6 days')),
   -- Mission 6: EHPAD Belleville
@@ -146,7 +146,7 @@ INSERT INTO participations (id, user_id, mission_id, status, registered_at) VALU
   (42, 3,  6, 'confirmed',  date('now', '-5 days')),
   (43, 8,  6, 'confirmed',  date('now', '-4 days')),
   (44, 16, 6, 'confirmed',  date('now', '-4 days')),
-  (45, 18, 6, 'registered', date('now', '-4 days')),
+  (45, 18, 6, 'cancelled',  date('now', '-4 days')),
   (46, 19, 6, 'confirmed',  date('now', '-4 days')),
   -- Mission 7: Fresque du Numérique (28 jours)
   (47, 2,  7, 'completed',  date('now', '-29 days')),
@@ -174,10 +174,10 @@ INSERT INTO participations (id, user_id, mission_id, status, registered_at) VALU
   (65, 30, 10, 'confirmed',  date('now', '-14 days')),
   (66, 36, 10, 'confirmed',  date('now', '-14 days')),
   (67, 37, 10, 'confirmed',  date('now', '-13 days')),
-  (68, 38, 10, 'registered', date('now', '-13 days')),
+  (68, 38, 10, 'cancelled',  date('now', '-13 days')),
   (70, 50, 11, 'confirmed',  date('now', '-10 days')),
   (71, 51, 11, 'confirmed',  date('now', '-10 days')),
-  (72, 52, 11, 'confirmed',  date('now', '-9 days')),
+  (72, 52, 11, 'cancelled',  date('now', '-9 days')),
   (73, 50, 12, 'registered', date('now', '-6 days')),
   (74, 54, 12, 'registered', date('now', '-6 days'));
 

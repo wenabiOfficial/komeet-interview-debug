@@ -14,9 +14,10 @@ Le client signale que son export hebdomadaire des participations aux missions
 contient des doublons depuis hier. Sur les 80 lignes du CSV, il en compte
 "plusieurs dizaines" en double exact ou quasi-exact.
 
-Le client utilise cet export pour son reporting RSE mensuel, donc bloquant
-pour eux. Sophie a précisé que le responsable RSE d'Acme prépare un board
-demain matin — on a besoin d'une réponse avant 9h.
+Le client utilise cet export pour son **reporting RSE mensuel** : il a besoin
+de la liste des participations effectives de ses salariés sur le mois. Sophie
+(CSM) précise que c'est un livrable obligatoire qu'il transmet à sa direction
+RSE, donc bloquant côté Acme Corp.
 
 ---
 
