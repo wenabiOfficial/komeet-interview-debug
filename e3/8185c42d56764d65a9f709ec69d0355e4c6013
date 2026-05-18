@@ -1,0 +1,26 @@
+db/seed.sql
+  s_1b7f2e96d38b49::t_d5e1b2d4f0a92c 149
+  s_1b7f2e96d38b49::t_d8a727f29055a9 131-132
+  s_1b7f2e96d38b49::t_3ffc4c9ea4c3c4 140-141
+  s_1b7f2e96d38b49::t_6170dd13e7ae1e 177
+  s_1b7f2e96d38b49::t_3fa3fa02dbcf49 121-122
+  s_1b7f2e96d38b49::t_39658e576f916a 180
+docs/TICKET.md
+  s_1b7f2e96d38b49::t_07d048e03db9de 17-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "e38185c42d56764d65a9f709ec69d0355e4c6013",
+  "prompts": {},
+  "sessions": {
+    "s_1b7f2e96d38b49": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7db99121-f72a-4f93-ae4c-e9698648deaa",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Guillaume <guillaume.lefebvre@komeet.cc>"
+    }
+  }
+}
