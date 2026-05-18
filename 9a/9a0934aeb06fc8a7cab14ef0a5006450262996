@@ -1,0 +1,19 @@
+package.json
+  s_840ff58dba5ee4::t_4c1d7c982c8a9d 6-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "9a9a0934aeb06fc8a7cab14ef0a5006450262996",
+  "prompts": {},
+  "sessions": {
+    "s_840ff58dba5ee4": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "7eee1343-1e1f-4123-a406-be7bddba3758",
+        "model": "composer-2"
+      },
+      "human_author": "Guillaume <guillaume.lefebvre@komeet.cc>"
+    }
+  }
+}
