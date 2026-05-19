@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Komeet SQL Editor</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: #111827;
+    background: #f9fafb;
+    padding: 24px;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; }
+
+  header { margin-bottom: 20px; }
+  header h1 { font-size: 20px; font-weight: 600; color: #111827; }
+  header p  { font-size: 12px; color: #6b7280; margin-top: 3px; }
+
+  details {
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    background: #fff;
+    margin-bottom: 16px;
+  }
+  details summary {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    user-select: none;
+    list-style: none;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] summary { border-bottom: 1px solid #e5e7eb; }
+  .schema-body { padding: 12px 14px; }
+  .schema-body code {
+    display: block;
+    font-family: Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+    color: #374151;
+    line-height: 1.7;
+    white-space: pre;
+  }
+  .schema-note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .editor-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 200px;
+    font-family: Menlo, Monaco, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 10px 12px;
+    resize: vertical;
+    color: #111827;
+    background: #fafafa;
+    outline: none;
+  }
+  textarea:focus { border-color: #2563eb; background: #fff; }
+
+  .action-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  button#run-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  button#run-btn:hover:not(:disabled) { background: #1d4ed8; }
+  button#run-btn:disabled { background: #93c5fd; cursor: not-allowed; }
+
+  #stats { font-size: 12px; color: #6b7280; }
+
+  #result-area { margin-bottom: 24px; }
+
+  .error-block {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 4px;
+    padding: 12px 14px;
+    color: #991b1b;
+    font-family: Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+    word-break: break-word;
+  }
+
+  .truncate-banner {
+    background: #fefce8;
+    border: 1px solid #fde047;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #854d0e;
+    margin-bottom: 8px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    background: #f3f4f6;
+    text-align: left;
+    padding: 8px 12px;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) { background: #f9fafb; }
+  tbody tr:hover { background: #eff6ff; }
+  tbody td {
+    padding: 7px 12px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #111827;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .null-cell { color: #9ca3af; font-style: italic; }
+
+  .empty-result {
+    padding: 20px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+  }
+
+  footer {
+    font-size: 11px;
+    color: #9ca3af;
+    text-align: center;
+    padding-top: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Komeet SQL Editor</h1>
+    <p>Base : komeet.sqlite &mdash; SELECT only</p>
+  </header>
+
+  <details>
+    <summary>📋 Schéma disponible</summary>
+    <div class="schema-body">
+      <code>companies    (id, name, plan, created_at)
+users        (id, company_id, email, first_name, last_name, status, created_at, deleted_at)
+missions     (id, company_id, title, starts_at, ends_at, created_at)
+participations (id, user_id, mission_id, status, registered_at)
+mission_roles  (id, participation_id, role, assigned_at)</code>
+      <p class="schema-note">
+        <code>users.deleted_at</code> est non-null si l'utilisateur est supprimé (soft delete).<br>
+        <code>participations.status</code> : 'registered', 'confirmed', 'cancelled' ou 'completed'.
+      </p>
+    </div>
+  </details>
+
+  <div class="editor-card">
+    <textarea id="query" placeholder="SELECT * FROM companies LIMIT 10" spellcheck="false"></textarea>
+    <div class="action-bar">
+      <button id="run-btn">▶ Run query</button>
+      <span id="stats"></span>
+    </div>
+  </div>
+
+  <div id="result-area"></div>
+
+  <footer>Conseil : Cmd/Ctrl + Enter pour lancer la query</footer>
+
+</div>
+<script>
+  const queryEl  = document.getElementById('query');
+  const runBtn   = document.getElementById('run-btn');
+  const statsEl  = document.getElementById('stats');
+  const resultEl = document.getElementById('result-area');
+
+  const STORAGE_KEY = 'komeet-sql-last-query';
+
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) queryEl.value = saved;
+
+  let saveTimer = null;
+  queryEl.addEventListener('input', () => {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => localStorage.setItem(STORAGE_KEY, queryEl.value), 500);
+  });
+
+  queryEl.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      e.preventDefault();
+      runQuery();
+    }
+  });
+
+  runBtn.addEventListener('click', runQuery);
+
+  async function runQuery() {
+    const query = queryEl.value.trim();
+    if (!query) return;
+
+    runBtn.disabled = true;
+    runBtn.textContent = 'Running…';
+    statsEl.textContent = '';
+    resultEl.innerHTML = '';
+
+    try {
+      const res = await fetch('/sql/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        resultEl.innerHTML = `<div class="error-block">${escHtml(data.error ?? 'Unknown error')}</div>`;
+        return;
+      }
+
+      statsEl.textContent = `${data.durationMs} ms · ${data.rowCount} row${data.rowCount !== 1 ? 's' : ''}`;
+
+      if (data.truncated) {
+        resultEl.innerHTML = '<div class="truncate-banner">⚠️ Résultats tronqués à 1000 lignes</div>';
+      }
+
+      if (data.rows.length === 0) {
+        resultEl.innerHTML += '<div class="empty-result">Aucun résultat.</div>';
+        return;
+      }
+
+      const thead = data.columns.map(c => `<th>${escHtml(String(c))}</th>`).join('');
+      const tbody = data.rows.map(row =>
+        '<tr>' + row.map(cell =>
+          cell === null
+            ? '<td class="null-cell">NULL</td>'
+            : `<td title="${escHtml(String(cell))}">${escHtml(String(cell))}</td>`
+        ).join('') + '</tr>'
+      ).join('');
+
+      resultEl.innerHTML += `<div class="table-wrap"><table><thead><tr>${thead}</tr></thead><tbody>${tbody}</tbody></table></div>`;
+
+    } catch {
+      resultEl.innerHTML = '<div class="error-block">Erreur réseau — le serveur est-il démarré ?</div>';
+    } finally {
+      runBtn.disabled = false;
+      runBtn.textContent = '▶ Run query';
+    }
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
+</body>
+</html>

@@ -20,6 +20,14 @@ npm run dev          # démarre le serveur sur http://localhost:3000
 curl "http://localhost:3000/exports/missions?companyId=1" -o export.csv
 ```
 
+## Éditeur SQL
+
+Une fois le serveur lancé, l'éditeur SQL est accessible sur :
+
+http://localhost:3000/sql
+
+Permet d'écrire des requêtes SELECT sur la base directement depuis ton navigateur, sans installation. Le schéma est rappelé en haut de la page.
+
 ## Tests
 
 ```bash

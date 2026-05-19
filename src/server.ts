@@ -1,5 +1,6 @@
 import express from 'express';
 import exportsRouter from './routes/exports.js';
+import sqlRouter from './routes/sql.js';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -11,6 +12,7 @@ app.get('/health', (_req, res) => {
 });
 
 app.use('/exports', exportsRouter);
+app.use('/sql', sqlRouter);
 
 app.listen(PORT, () => {
   console.log(
