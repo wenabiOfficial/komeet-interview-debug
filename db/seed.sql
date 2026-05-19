@@ -300,3 +300,33 @@ INSERT INTO mission_roles (participation_id, role, assigned_at) VALUES
   (72, 'mentor',    date('now', '-9 days')),
   (73, 'volunteer', date('now', '-6 days')),
   (74, 'volunteer', date('now', '-6 days'));
+
+-- ─────────────────────────────────────────────
+-- Company 4 — Meridian Finance
+-- 10 users, 2 participations → ~20% engagement
+-- ─────────────────────────────────────────────
+INSERT INTO companies (id, name, plan, created_at) VALUES
+  (4, 'Meridian Finance', 'enterprise', '2023-11-01T10:00:00Z');
+
+INSERT INTO users (id, company_id, email, first_name, last_name, status, created_at, deleted_at) VALUES
+  (60, 4, 'thomas.aubert@meridian.fr',     'Thomas',     'Aubert',   'active',  '2023-11-05T09:00:00Z', NULL),
+  (61, 4, 'isabelle.collet@meridian.fr',   'Isabelle',   'Collet',   'active',  '2023-11-05T09:30:00Z', NULL),
+  (62, 4, 'patrick.meyer@meridian.fr',     'Patrick',    'Meyer',    'active',  '2023-11-10T10:00:00Z', NULL),
+  (63, 4, 'sophie.brun@meridian.fr',       'Sophie',     'Brun',     'active',  '2023-11-15T14:00:00Z', NULL),
+  (64, 4, 'jerome.lacombe@meridian.fr',    'Jérôme',     'Lacombe',  'active',  '2023-12-01T09:00:00Z', NULL),
+  (65, 4, 'valerie.leger@meridian.fr',     'Valérie',    'Léger',    'active',  '2023-12-10T10:00:00Z', NULL),
+  (66, 4, 'nicolas.renard@meridian.fr',    'Nicolas',    'Renard',   'active',  '2024-01-08T09:00:00Z', NULL),
+  (67, 4, 'aurelie.picard@meridian.fr',    'Aurélie',    'Picard',   'invited', '2024-02-01T14:00:00Z', NULL),
+  (68, 4, 'christophe.guerin@meridian.fr', 'Christophe', 'Guérin',   'active',  '2024-03-01T09:00:00Z', NULL),
+  (69, 4, 'marine.leclaire@meridian.fr',   'Marine',     'Leclaire', 'active',  '2024-04-15T10:00:00Z', NULL);
+
+INSERT INTO missions (id, company_id, title, starts_at, ends_at, created_at) VALUES
+  (13, 4, 'Collecte vêtements Croix-Rouge', date('now', '-15 days'), date('now', '-14 days'), date('now', '-28 days'));
+
+INSERT INTO participations (id, user_id, mission_id, status, registered_at) VALUES
+  (80, 60, 13, 'completed', date('now', '-17 days')),
+  (81, 61, 13, 'completed', date('now', '-17 days'));
+
+INSERT INTO mission_roles (participation_id, role, assigned_at) VALUES
+  (80, 'leader',    date('now', '-17 days')),
+  (81, 'volunteer', date('now', '-17 days'));

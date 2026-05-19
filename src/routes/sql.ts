@@ -25,9 +25,9 @@ router.post('/run', (req: Request, res: Response) => {
     return;
   }
 
-  const trimmed = query.replace(/^[\s\-\-.*\n]*/m, '').trim();
+  const trimmed = query.trim();
 
-  if (!/^SELECT\b/i.test(trimmed)) {
+  if (!/^(SELECT|WITH|EXPLAIN)\b/i.test(trimmed)) {
     res.status(400).json({ error: 'Only SELECT queries are allowed.' });
     return;
   }

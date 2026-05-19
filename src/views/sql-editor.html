@@ -195,7 +195,7 @@ missions     (id, company_id, title, starts_at, ends_at, created_at)
 participations (id, user_id, mission_id, status, registered_at)
 mission_roles  (id, participation_id, role, assigned_at)</code>
       <p class="schema-note">
-        <code>users.deleted_at</code> est non-null si l'utilisateur est supprimé (soft delete).<br>
+        <code>users.status</code> : 'active', 'invited' ou 'disabled'.<br>
         <code>participations.status</code> : 'registered', 'confirmed', 'cancelled' ou 'completed'.
       </p>
     </div>
