@@ -303,7 +303,6 @@ INSERT INTO mission_roles (participation_id, role, assigned_at) VALUES
 
 -- ─────────────────────────────────────────────
 -- Company 4 — Meridian Finance
--- 10 users, 2 participations → ~20% engagement
 -- ─────────────────────────────────────────────
 INSERT INTO companies (id, name, plan, created_at) VALUES
   (4, 'Meridian Finance', 'enterprise', '2023-11-01T10:00:00Z');
